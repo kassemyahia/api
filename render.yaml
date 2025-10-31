@@ -12,7 +12,7 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        value: base64:YOUR_GENERATED_KEY_HERE
+        value: base64:uFQnusg0YMY1tWheVkzb9KWyC5vJaHI3LlfTVhG72Ec=
       - key: DB_CONNECTION
         value: sqlsrv
       - key: DB_HOST
