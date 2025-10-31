@@ -1,32 +1,33 @@
-# استخدم صورة PHP مع Apache
-FROM php:8.2-apache
+# استخدام PHP 8.2 مع FPM
+FROM php:8.2-fpm
 
-# تثبيت المكتبات الأساسية
-RUN apt-get update && apt-get install -y libzip-dev unzip git \
-    && docker-php-ext-install pdo pdo_mysql zip
+# تثبيت الأدوات اللازمة
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    libzip-dev \
+    libonig-dev \
+    libxml2-dev \
+    curl \
+    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath xml \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# نسخ إعدادات Apache
-COPY ./docker/apache/laravel.conf /etc/apache2/sites-available/000-default.conf
-RUN a2enmod rewrite
+# تثبيت Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# نسخ ملفات composer فقط أولاً
+# إنشاء مجلد العمل ونسخ الملفات
 WORKDIR /var/www/html
-COPY composer.json composer.lock ./
-
-# تثبيت Composer من صورة رسمية
-COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
-
-# تثبيت حزم Laravel
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
-
-# نسخ باقي ملفات المشروع
 COPY . .
 
-# صلاحيات مجلدات Laravel
-RUN chown -R www-data:www-data storage bootstrap/cache
+# تثبيت الاعتماديات
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
-# فتح المنفذ 80
-EXPOSE 80
+# إعطاء صلاحيات للـ Laravel
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# تشغيل Apache
-CMD ["apache2-foreground"]
+# Expose port
+EXPOSE 8000
+
+# تشغيل Laravel
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
