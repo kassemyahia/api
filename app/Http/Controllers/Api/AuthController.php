@@ -21,12 +21,16 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'birth_date' => 'required|date',
+            'gender' => 'required|in:male,female,other',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'birth_date' => $request->birth_date,
+            'gender' => $request->gender,
         ]);
 
         $token = $user->createToken('api_token')->plainTextToken;
