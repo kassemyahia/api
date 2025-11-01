@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->noContent();
+        return response()->noContent(HttpResponse::HTTP_NO_CONTENT);
     }
 
     /**
@@ -33,6 +34,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return response()->noContent();
+        return response()->noContent(HttpResponse::HTTP_NO_CONTENT);
     }
 }

@@ -10,6 +10,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Symfony\Component\HttpFoundation\Response as HttpResponse;
 
 class RegisteredUserController extends Controller
 {
@@ -36,6 +37,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return response()->noContent();
+        $request->session()->regenerate();
+
+        return response()->noContent(HttpResponse::HTTP_NO_CONTENT);
     }
 }
