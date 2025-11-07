@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('books', function (Blueprint $table) {
-            $table->id('BookID');
+            $table->id();
             $table->string('BookName');
             $table->string('Muhaddith')->nullable();
             $table->integer('NumOfHadiths')->default(0);

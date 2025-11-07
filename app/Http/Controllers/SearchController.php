@@ -42,8 +42,8 @@ class SearchController extends Controller
         }
 
         // 🧩 Include relationships if needed
-        $hadiths = $query->with(['narrator', 'source', 'topics'])->paginate(10);
-
+        $hadiths = $query->with(['narrator', 'source'])->paginate(10);
+//        $hadiths = $query->with(['narrator', 'source', 'topics'])->paginate(10);
         return response()->json([
             'success' => true,
             'count'   => $hadiths->total(),

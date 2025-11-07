@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('narrators', function (Blueprint $table) {
-            $table->id('NarratorID');
+            $table->id();
             $table->string('Name');
-            $table->enum('Gender', ['Male', 'Female'])->nullable();
-            $table->enum('NarratorType', ['Companion', 'Follower', 'Scholar'])->nullable();
+            $table->enum('Gender', ['M', 'F'])->nullable();
+            $table->enum('NarratorType', ['Rawi', 'Muhaddith'])->nullable();
             $table->timestamps();
         });
     }

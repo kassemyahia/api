@@ -16,9 +16,9 @@ class Hadith extends Model
         return $this->belongsTo(Book::class, 'Source');
     }
 
-    public function topics()
-    {
-        return $this->belongsToMany(Topic::class, 'topic_classes', 'HadithID', 'TopicID');
-    }
+//    public function topics()
+//    {
+//        return $this->belongsToMany(Topic::class, 'topic_classes', 'HadithID', 'id');
+//    }
 
 }

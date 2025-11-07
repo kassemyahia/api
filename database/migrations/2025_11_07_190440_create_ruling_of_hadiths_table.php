@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('ruling_of_hadiths', function (Blueprint $table) {
-            $table->id('RulingID');
+            $table->id();
             $table->string('RulingText');
             $table->timestamps();
         });

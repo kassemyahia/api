@@ -1,27 +1,31 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
-public function up(): void {
-Schema::create('hadiths', function (Blueprint $table) {
-$table->id('HadithID');
-$table->foreignId('SubValid')->nullable();
-$table->foreignId('AdminID')->nullable();
-$table->foreignId('Explaining')->nullable()->constrained('explainings');
-$table->enum('HadithType', ['Sahih', 'Daif', 'Hasan'])->nullable();
-$table->text('HadithText');
-$table->text('TextWithoutDiacritics')->nullable();
-$table->integer('HadithNumber')->nullable();
-$table->foreignId('RulingOfMuhaddith')->nullable()->constrained('ruling_of_hadiths');
-$table->foreignId('FinalRuling')->nullable()->constrained('ruling_of_hadiths');
-$table->foreignId('Narrator')->nullable()->constrained('narrators');
-$table->foreignId('Source')->nullable()->constrained('books');
-$table->timestamps();
-});
-}
-public function down(): void {
-Schema::dropIfExists('hadiths');
-}
+    public function up(): void
+    {
+        Schema::create('hadiths', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('SubValid')->nullable();
+            $table->foreignId('AdminID')->nullable();
+            $table->foreignId('Explaining')->nullable()->constrained('explainings');
+            $table->enum('HadithType', ['Sahih', 'Daif', 'Hasan'])->nullable();
+            $table->text('HadithText');
+            $table->text('TextWithoutDiacritics')->nullable();
+            $table->integer('HadithNumber')->nullable();
+            $table->foreignId('RulingOfMuhaddith')->nullable()->constrained('ruling_of_hadiths');
+            $table->foreignId('FinalRuling')->nullable()->constrained('ruling_of_hadiths');
+            $table->foreignId('Narrator')->nullable()->constrained('narrators');
+            $table->foreignId('Source')->nullable()->constrained('books');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('hadiths');
+    }
 };
