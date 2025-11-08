@@ -28,6 +28,7 @@ RUN chown -R www-data:www-data /var/www/html \
 
 # Expose port
 EXPOSE 8000
+RUN chmod -R 777 /opt/render/project/src/database
 
 # تشغيل Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
