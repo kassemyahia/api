@@ -7,9 +7,9 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
-            $table->string('BookName');
-            $table->string('Muhaddith')->nullable();
-            $table->integer('NumOfHadiths')->default(0);
+            $table->string('book_name');
+            $table->string('muhaddith')->nullable();
+            $table->integer('num_of_hadiths')->default(0);
             $table->timestamps();
         });
     }

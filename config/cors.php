@@ -7,28 +7,30 @@ return [
     | Cross-Origin Resource Sharing (CORS) Configuration
     |--------------------------------------------------------------------------
     |
-    | Here you may configure your settings for cross-origin resource sharing
-    | or "CORS". This determines what cross-origin operations may execute
-    | in web browsers. You are free to adjust these settings as needed.
-    |
-    | To learn more: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
+    | إعدادات السماح بالوصول من مصادر مختلفة (CORS)
     |
     */
 
-    'paths' => ['*'],
+    // 🔹 اسمح بالوصول لجميع مسارات الـ API
+    'paths' => ['api/*'],
 
+    // 🔹 اسمح بجميع أنواع الطلبات (GET, POST, PUT, DELETE...)
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000')],
+    // 🔹 اسمح للواجهة القادمة من أي مكان (لتجربة محلية)
+    //    ملاحظة: لاحقًا يمكن استبدال '*' بـ ['http://127.0.0.1:5500']
+    'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 
+    // 🔹 اسمح بجميع الهيدرز
     'allowed_headers' => ['*'],
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => true,
+    // 🔹 عادة false كافية، true مطلوبة فقط عند استخدام الكوكيز مع CORS
+    'supports_credentials' => false,
 
 ];
