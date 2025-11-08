@@ -1,5 +1,5 @@
 # استخدام PHP 8.2 مع FPM
-FROM php:8.2-fpm
+FROM php:8.3-fpm
 
 # تثبيت الأدوات اللازمة
 RUN apt-get update && apt-get install -y \
