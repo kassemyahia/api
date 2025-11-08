@@ -6,10 +6,11 @@ RUN apt-get update && apt-get install -y \
     git \
     unzip \
     libzip-dev \
+    libpq-dev \
     libonig-dev \
     libxml2-dev \
     curl \
-    && docker-php-ext-install pdo pdo_mysql mbstring zip exif pcntl bcmath xml \
+    && docker-php-ext-install pdo pdo_pgsql mbstring zip exif pcntl bcmath xml \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # تثبيت Composer
