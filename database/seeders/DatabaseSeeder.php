@@ -10,8 +10,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('explainings')->insert([
-            ['id' => 1, 'ExplanationText' => 'توضيح أول (تجريبي)'],
-            ['id' => 2, 'ExplanationText' => 'توضيح ثاني (تجريبي)'],
+            ['id' => 1, 'EText' => 'توضيح أول (تجريبي)'],
+            ['id' => 2, 'EText' => 'توضيح ثاني (تجريبي)'],
         ]);
 
 
@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         // 👳 Narrators
         // ============================
         DB::table('narrators')->insert([
-            ['id' => 20, 'Name' => 'أبو هريرة', 'Gender' => 'Male', 'NarratorType' => 'Companion'],
+            ['id' => 20, 'Name' => 'أبو هريرة', 'Gender' => 'M', 'NarratorType' => 'Rawi'],
         ]);
 
         // ============================

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void {
         Schema::create('explainings', function (Blueprint $table) {
-            $table->id('EID');
+            $table->id();
             $table->text('ETEXT');
             $table->timestamps();
         });

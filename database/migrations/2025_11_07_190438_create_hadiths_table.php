@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->foreignId('SubValid')->nullable();
             $table->foreignId('AdminID')->nullable();
             $table->foreignId('Explaining')->nullable()->constrained('explainings');
-            $table->enum('HadithType', ['Sahih', 'Daif', 'Hasan'])->nullable();
+            $table->enum('HadithType', ['مرفوع', 'قدسي'])->nullable();
             $table->text('HadithText');
             $table->text('TextWithoutDiacritics')->nullable();
             $table->integer('HadithNumber')->nullable();
