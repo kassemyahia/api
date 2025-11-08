@@ -18,22 +18,25 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # تحديد مجلد العمل
 WORKDIR /var/www/html
 
-# نسخ جميع ملفات المشروع
+# نسخ المشروع بالكامل (بما فيهم قاعدة البيانات)
 COPY . .
 
 # تثبيت الاعتماديات
-RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
-# إنشاء مجلد قاعدة البيانات في حال لم يكن موجوداً
-RUN mkdir -p /var/www/html/database
+# إعطاء صلاحيات للـ storage و bootstrap/cache وملف قاعدة البيانات
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod 666 /var/www/html/database/database.sqlite || true
 
-# إعطاء صلاحيات كاملة لمجلدات Laravel المطلوبة
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 777 /var/www/html/database
+# تشغيل أوامر Laravel الأساسية
+RUN php artisan key:generate --force || true \
+    && php artisan config:clear || true \
+    && php artisan cache:clear || true \
+    && php artisan route:clear || true
 
-# فتح المنفذ 8000
+# فتح المنفذ
 EXPOSE 8000
 
-# تشغيل سيرفر Laravel
+# تشغيل السيرفر
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+
