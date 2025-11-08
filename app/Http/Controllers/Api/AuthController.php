@@ -18,29 +18,29 @@ class AuthController extends Controller
     public function register(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|lowercase|email|max:255|unique:users',
+            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
             'birth_date' => 'required|date',
-            'gender' => 'required|in:male,female,other',
+            'gender' => 'required|in:male,female',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
-            'birth_date' => $request->birth_date,
-            'gender' => $request->gender,
+            'birth_date' => $validated['birth_date'],
+            'gender' => $validated['gender'],
         ]);
 
         $token = $user->createToken('api_token')->plainTextToken;
 
         return response()->json([
-            'message' => 'Registration successful.',
             'user' => $user,
             'token' => $token,
-        ], Response::HTTP_CREATED);
+        ], 201);
     }
+
 
     /**
      * Handle API login attempts and return an access token.

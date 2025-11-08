@@ -18,6 +18,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->date('birth_date')->nullable();
+            $table->enum('gender', ['male', 'female'])->nullable();
+            $table->enum('UserType', ['Admin', 'Scholar', 'User'])->default('User');
+            $table->foreignId('SearchID')->nullable()->constrained('search_histories')->onDelete('set null');
             $table->timestamps();
         });
 
