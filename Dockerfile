@@ -37,3 +37,5 @@ EXPOSE 8000
 
 # تشغيل سيرفر Laravel
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
+# Run migrations and seed the database
+RUN php artisan migrate --force && php artisan db:seed --force

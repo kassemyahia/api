@@ -19,3 +19,4 @@ services:
         value: /var/www/html/database/database.sqlite
       - key: DB_FOREIGN_KEYS
         value: true
+
