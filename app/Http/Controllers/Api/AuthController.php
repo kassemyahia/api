@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,14 +20,16 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users', // ✅ added username
             'email' => 'required|string|lowercase|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', \Illuminate\Validation\Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'birth_date' => 'required|date',
             'gender' => 'required|in:male,female',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
+            'username' => $validated['username'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
             'birth_date' => $validated['birth_date'],
@@ -36,31 +39,41 @@ class AuthController extends Controller
         $token = $user->createToken('api_token')->plainTextToken;
 
         return response()->json([
+            'message' => 'Registration successful.',
             'user' => $user,
             'token' => $token,
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
-
 
     /**
      * Handle API login attempts and return an access token.
      */
     public function login(Request $request): JsonResponse
     {
-        $credentials = $request->validate([
-            'email' => ['required', 'string', 'email'],
+        $request->validate([
+            'login' => ['required', 'string'], // can be email OR username
             'password' => ['required', 'string'],
         ]);
 
-        $user = User::where('email', $credentials['email'])->first();
+        // Determine if the input is an email or username
+        $loginType = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL)
+            ? 'email'
+            : 'username';
 
-        if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+        $credentials = [
+            $loginType => $request->input('login'),
+            'password' => $request->input('password'),
+        ];
+
+        if (!Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'Invalid credentials.',
+                'message' => 'Invalid email/username or password.'
             ], Response::HTTP_UNAUTHORIZED);
         }
 
-        // Revoke existing tokens to prevent token sprawl for this client.
+        $user = Auth::user();
+
+        // Optional: revoke previous tokens for security
         $user->tokens()->delete();
 
         $token = $user->createToken('api_token')->plainTextToken;
@@ -69,11 +82,11 @@ class AuthController extends Controller
             'message' => 'Login successful.',
             'user' => $user,
             'token' => $token,
-        ]);
+        ], Response::HTTP_OK);
     }
 
     /**
-     * Revoke the current access token.
+     * Revoke the current access token (logout).
      */
     public function logout(Request $request): JsonResponse
     {
@@ -81,7 +94,6 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Logged out successfully.',
-        ]);
+        ], Response::HTTP_OK);
     }
 }
-
