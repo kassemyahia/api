@@ -19,8 +19,8 @@ class SearchController extends Controller
         // 🔍 Keyword search
         if ($keyword) {
             $query->where(function ($q) use ($keyword) {
-                $q->where('HadithText', 'LIKE', "%$keyword%")
-                    ->orWhere('TextWithoutDiacritics', 'LIKE', "%$keyword%");
+                $q->where('HadithText', 'ILIKE', '%$keyword%')
+                    ->orWhere('TextWithoutDiacritics', 'ILIKE', '%$keyword%');
             });
         }
 
