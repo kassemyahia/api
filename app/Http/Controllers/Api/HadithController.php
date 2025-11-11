@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\TextHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Hadith;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class HadithController extends Controller
     {
         $data = $request->validate([
             'hadithtext' => 'required|string',
-            'textwithoutdiacritics' => 'nullable|string',
+            TextHelper::normalizeArabic('textwithoutdiacritics') => 'nullable|string',
             'hadithtype' => 'nullable|string',
             'hadithnumber' => 'nullable|integer',
             'narrator' => 'nullable|exists:narrators,id',

@@ -10,8 +10,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         DB::table('explainings')->insert([
-            ['id' => 1, 'EText' => 'توضيح أول (تجريبي)'],
-            ['id' => 2, 'EText' => 'توضيح ثاني (تجريبي)'],
+            [ 'ETEXT' => 'توضيح أول (تجريبي)'],
+            [ 'ETEXT' => 'توضيح ثاني (تجريبي)'],
         ]);
 
 
@@ -19,25 +19,25 @@ class DatabaseSeeder extends Seeder
         // ⚖️ RulingOfHadiths
         // ============================
         DB::table('ruling_of_hadiths')->insert([
-            ['id' => 1, 'RulingText' => 'صحيح'],
-            ['id' => 2, 'RulingText' => 'ضعيف'],
+            [ 'RulingText' => 'صحيح'],
+            [ 'RulingText' => 'ضعيف'],
         ]);
 
         // ============================
         // 📚 Books
         // ============================
         DB::table('books')->insert([
-            ['id' => 1, 'BookName' => 'صحيح البخاري', 'Muhaddith' => 1, 'NumOfHadiths' => 7563],
-            ['id' => 2, 'BookName' => 'صحيح مسلم', 'Muhaddith' => 2, 'NumOfHadiths' => 3033],
-            ['id' => 10, 'BookName' => 'صحيح الجامع', 'Muhaddith' => 9, 'NumOfHadiths' => 8201],
-            ['id' => 14, 'BookName' => 'كتاب آخر (من بيانات الحديث رقم 6)', 'Muhaddith' => 1, 'NumOfHadiths' => 0],
+            ['book_name'=> 'صحيح البخاري', 'muhaddith' => 1, 'num_of_hadiths' => 7563],
+            ['book_name'=> 'صحيح مسلم', 'muhaddith' => 2, 'num_of_hadiths' => 3033],
+            ['book_name' => 'صحيح الجامع', 'muhaddith' => 1, 'num_of_hadiths' => 8201],
+            ['book_name' => 'كتاب آخر (من بيانات الحديث رقم 6)', 'muhaddith' => 1, 'num_of_hadiths' => 0],
         ]);
 
         // ============================
         // 👳 Narrators
         // ============================
         DB::table('narrators')->insert([
-            ['id' => 20, 'Name' => 'أبو هريرة', 'Gender' => 'M', 'NarratorType' => 'Rawi'],
+            [ 'Name' => 'أبو هريرة', 'Gender' => 'M', 'NarratorType' => 'Rawi'],
         ]);
 
         // ============================
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         // ============================
         DB::table('hadiths')->insert([
             [
-                'id' => 1,
+
                 'SubValid' => null,
                 'AdminID' => 1,
                 'Explaining' => 1,
@@ -54,11 +54,11 @@ class DatabaseSeeder extends Seeder
                 'HadithNumber' => 2083,
                 'RulingOfMuhaddith' => 1,
                 'FinalRuling' => 1,
-                'Narrator' => 20,
+                'Narrator' => 1,
                 'Source' => 1
             ],
             [
-                'id' => 2,
+
                 'SubValid' => null,
                 'AdminID' => 1,
                 'Explaining' => 1,
@@ -67,11 +67,11 @@ class DatabaseSeeder extends Seeder
                 'HadithNumber' => 5344,
                 'RulingOfMuhaddith' => 1,
                 'FinalRuling' => 1,
-                'Narrator' => 20,
-                'Source' => 10
+                'Narrator' => 1,
+                'Source' => 1
             ],
             [
-                'id' => 4,
+
                 'SubValid' => null,
                 'AdminID' => 1,
                 'Explaining' => 2,
@@ -80,11 +80,11 @@ class DatabaseSeeder extends Seeder
                 'HadithNumber' => 7494,
                 'RulingOfMuhaddith' => 1,
                 'FinalRuling' => 1,
-                'Narrator' => 20,
+                'Narrator' => 1,
                 'Source' => 1
             ],
             [
-                'id' => 5,
+
                 'SubValid' => null,
                 'AdminID' => 1,
                 'Explaining' => 2,
@@ -93,11 +93,11 @@ class DatabaseSeeder extends Seeder
                 'HadithNumber' => 758,
                 'RulingOfMuhaddith' => 1,
                 'FinalRuling' => 1,
-                'Narrator' => 20,
-                'Source' => 2
+                'Narrator' => 1,
+                'Source' => 1
             ],
             [
-                'id' => 6,
+
                 'SubValid' => null,
                 'AdminID' => 1,
                 'Explaining' => 2,
@@ -106,8 +106,8 @@ class DatabaseSeeder extends Seeder
                 'HadithNumber' => 1315,
                 'RulingOfMuhaddith' => 1,
                 'FinalRuling' => 1,
-                'Narrator' => 20,
-                'Source' => 14
+                'Narrator' => 1,
+                'Source' => 1
             ],
         ]);
     }
