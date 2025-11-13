@@ -9,7 +9,6 @@ return new class extends Migration {
             $table->id();
             $table->string('book_name');
             $table->string('muhaddith')->nullable();
-            $table->integer('num_of_hadiths')->default(0);
             $table->timestamps();
         });
     }

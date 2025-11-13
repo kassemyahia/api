@@ -21,7 +21,6 @@ return new class extends Migration
                 $table->rememberToken();
                 $table->date('birth_date')->nullable();
                 $table->string('gender')->nullable();
-                $table->string('UserType')->default('User');
                 $table->timestamps();
             });
         }

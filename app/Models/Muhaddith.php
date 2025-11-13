@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Narrator extends Model
+class Muhaddith extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
         'gender',
-        'narratortype',
     ];
 
     // 🔗 العلاقات

@@ -10,7 +10,6 @@ $table->id();
 $table->foreignId('SubValid')->nullable();
 $table->text('FakeHadithText');
 $table->string('Ruling')->nullable();
-$table->foreignId('AdminID')->nullable();
 $table->timestamps();
 });
 }

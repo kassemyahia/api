@@ -5,15 +5,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('search_histories', function (Blueprint $table) {
+        Schema::create('rawi', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->text('SearchText')->nullable();
-            $table->dateTime('SearchDate')->default(now());
+            $table->string('Name');
+            $table->enum('Gender', ['M', 'F'])->nullable();
+            $table->text('halalrawi')->nullable();
             $table->timestamps();
         });
     }
     public function down(): void {
-        Schema::dropIfExists('search_histories');
+        Schema::dropIfExists('narrators');
     }
 };

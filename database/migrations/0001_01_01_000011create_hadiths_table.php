@@ -10,7 +10,6 @@ return new class extends Migration {
         Schema::create('hadiths', function (Blueprint $table) {
             $table->id();
             $table->foreignId('SubValid')->nullable();
-            $table->foreignId('AdminID')->nullable();
             $table->foreignId('Explaining')->nullable()->constrained('explainings');
             $table->enum('HadithType', ['مرفوع', 'قدسي'])->nullable();
             $table->text('HadithText');
@@ -18,8 +17,9 @@ return new class extends Migration {
             $table->integer('HadithNumber')->nullable();
             $table->foreignId('RulingOfMuhaddith')->nullable()->constrained('ruling_of_hadiths');
             $table->foreignId('FinalRuling')->nullable()->constrained('ruling_of_hadiths');
-            $table->foreignId('Narrator')->nullable()->constrained('narrators');
+            $table->foreignId('Rawi')->nullable()->constrained('rawi');
             $table->foreignId('Source')->nullable()->constrained('books');
+            $table->foreignId('sanad')->nullable();
             $table->timestamps();
         });
     }

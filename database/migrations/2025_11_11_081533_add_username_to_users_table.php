@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->unique()->after('email')->nullable();
         });
-
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('searchid')->unique()->after('email')->nullable();
+        });
     }
 
     /**
