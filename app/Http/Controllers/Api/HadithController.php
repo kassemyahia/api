@@ -17,7 +17,7 @@ class HadithController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'hadithtext' => 'required|string',
+           $temp= 'hadithtext' => 'required|string',
             TextHelper::normalizeArabic('textwithoutdiacritics') => 'nullable|string',
             'hadithtype' => 'nullable|string',
             'hadithnumber' => 'nullable|integer',

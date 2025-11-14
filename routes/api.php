@@ -21,9 +21,9 @@ Route::apiResource('hadiths', HadithController::class);
 
 Route::apiResource('books', BookController::class);
 
-Route::apiResource('muhaddith', MuhaddithController::class);
+Route::apiResource('muhaddiths', MuhaddithController::class);
 
-Route::apiResource('rawi', RawiController::class);
+Route::apiResource('rawis', RawiController::class);
 
 Route::apiResource('ruling_of_hadiths', RulingController::class);
 
