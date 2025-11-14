@@ -18,6 +18,6 @@ class Book extends Model
     // 🔗 العلاقات
     public function hadiths()
     {
-        return $this->hasMany(Hadith::class, 'book_id');
+        return $this->hasMany(Hadith::class, 'source');
     }
 }

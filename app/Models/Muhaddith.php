@@ -17,6 +17,6 @@ class Muhaddith extends Model
     // 🔗 العلاقات
     public function hadiths()
     {
-        return $this->hasMany(Hadith::class, 'narrator_id');
+        return $this->hasMany(Book::class, 'muhaddith');
     }
 }

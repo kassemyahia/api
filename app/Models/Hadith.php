@@ -14,12 +14,11 @@ class Hadith extends Model
         'textwithoutdiacritics',
         'hadithtype',
         'hadithnumber',
-        'narrator',
+        'Rawi',
         'Source',
         'rulingofmuhaddith',
         'finalruling',
         'explaining',
-        'adminid',
         'subvalid',
     ];
 
@@ -29,9 +28,9 @@ class Hadith extends Model
         return $this->belongsTo(Book::class, 'book_id');
     }
 
-    public function narrator()
+    public function rawi()
     {
-        return $this->belongsTo(Narrator::class, 'narrator_id');
+        return $this->belongsTo(Rawi::class, 'Rawi');
     }
 
     public function explaining()
@@ -49,10 +48,10 @@ class Hadith extends Model
         return $this->belongsTo(RulingOfHadith::class, 'final_ruling_id');
     }
 
-    public function admin()
-    {
-        return $this->belongsTo(User::class, 'admin_id');
-    }
+//    public function admin()
+//    {
+//        return $this->belongsTo(User::class, 'admin_id');
+//    }
 
     public function topics()
     {
