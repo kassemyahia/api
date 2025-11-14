@@ -15,10 +15,10 @@ return new class extends Migration {
             $table->text('HadithText');
             $table->text('TextWithoutDiacritics')->nullable();
             $table->integer('HadithNumber')->nullable();
-            $table->foreignId('RulingOfMuhaddith')->nullable()->constrained('ruling_of_hadiths');
-            $table->foreignId('FinalRuling')->nullable()->constrained('ruling_of_hadiths');
-            $table->foreignId('Rawi')->nullable()->constrained('rawi');
-            $table->foreignId('Source')->nullable()->constrained('books');
+            $table->foreignId('RulingOfMuhaddith')->nullable()->constrained('ruling_of_hadiths')->nullOnDelete();
+            $table->foreignId('FinalRuling')->nullable()->constrained('ruling_of_hadiths')->nullOnDelete();
+            $table->foreignId('Rawi')->nullable()->constrained('rawis')->nullOnDelete();
+            $table->foreignId('Source')->nullable()->constrained('books')->nullOnDelete();
             $table->foreignId('sanad')->nullable();
             $table->timestamps();
         });

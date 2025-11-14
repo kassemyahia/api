@@ -7,10 +7,10 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('asker')->constrained('users')->nullOnDelete();
             $table->text('QuestionText');
             $table->dateTime('QuestionDate')->default(now());
-            $table->boolean('Answer')->default(false);
+            $table->foreignId('answerer')->nullable()->constrained('users')->nullOnDelete();
             $table->text('AnswerText')->nullable();
             $table->dateTime('AnswerDate')->nullable();
             $table->timestamps();

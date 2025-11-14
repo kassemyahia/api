@@ -9,7 +9,7 @@ Schema::create('fake_hadiths', function (Blueprint $table) {
 $table->id();
 $table->foreignId('SubValid')->nullable();
 $table->text('FakeHadithText');
-$table->string('Ruling')->nullable();
+$table->foreignId('Ruling')->nullable()->constrained('ruling_of_hadiths')->nullOnDelete();
 $table->timestamps();
 });
 }

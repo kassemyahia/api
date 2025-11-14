@@ -8,7 +8,7 @@ return new class extends Migration {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('book_name');
-            $table->string('muhaddith')->nullable();
+            $table->foreignId('muhaddith')->nullable()->constrained('muhaddiths')->nullondelete();
             $table->timestamps();
         });
     }
