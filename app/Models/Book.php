@@ -12,12 +12,11 @@ class Book extends Model
     protected $fillable = [
         'book_name',
         'muhaddith',
-        'num_of_hadiths',
     ];
 
     // 🔗 العلاقات
     public function hadiths()
     {
-        return $this->hasMany(Hadith::class, 'source');
+        return $this->hasMany(Hadith::class, 'Source');
     }
 }

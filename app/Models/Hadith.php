@@ -16,16 +16,29 @@ class Hadith extends Model
         'hadithnumber',
         'Rawi',
         'Source',
-        'rulingofmuhaddith',
-        'finalruling',
-        'explaining',
-        'subvalid',
+        'RulingOfMuhaddith',
+        'FinalRuling',
+        'Explaining',
+        'SubValid',
+    ];
+
+    protected $hidden =[
+        'id',
+        'Rawi',
+        'Source',
+        'TextWithoutDiacritics',
+        'RulingOfMuhaddith',
+        'FinalRuling',
+        'Explaining',
+        'SubValid',
+        'created_at',
+        'updated_at',
     ];
 
     // 🔗 العلاقات
     public function book()
     {
-        return $this->belongsTo(Book::class, 'book_id');
+        return $this->belongsTo(Book::class, 'Source');
     }
 
     public function rawi()
@@ -35,17 +48,17 @@ class Hadith extends Model
 
     public function explaining()
     {
-        return $this->belongsTo(Explaining::class, 'explaining_id');
+        return $this->belongsTo(Explaining::class, 'Explaining');
     }
 
     public function rulingOfMuhaddith()
     {
-        return $this->belongsTo(RulingOfHadith::class, 'ruling_of_muhaddith_id');
+        return $this->belongsTo(RulingOfHadith::class, 'RulingOfMuhaddith');
     }
 
     public function finalRuling()
     {
-        return $this->belongsTo(RulingOfHadith::class, 'final_ruling_id');
+        return $this->belongsTo(RulingOfHadith::class, 'FinalRuling');
     }
 
 //    public function admin()
@@ -55,6 +68,6 @@ class Hadith extends Model
 
     public function topics()
     {
-        return $this->belongsToMany(Topic::class, 'topic_classes', 'hadith_id', 'topic_id');
+        return $this->belongsToMany(Topic::class, 'topic_classes', 'hadithID', 'topicID');
     }
 }
