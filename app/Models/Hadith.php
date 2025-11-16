@@ -10,10 +10,10 @@ class Hadith extends Model
     use HasFactory;
 
     protected $fillable = [
-        'hadithtext',
-        'textwithoutdiacritics',
-        'hadithtype',
-        'hadithnumber',
+        'HadithText',
+        'TextWithoutDiacritics',
+        'HadithType',
+        'HadithNumber',
         'Rawi',
         'Source',
         'RulingOfMuhaddith',

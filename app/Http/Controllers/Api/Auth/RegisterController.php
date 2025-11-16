@@ -14,10 +14,10 @@ public function __invoke(Request $request)
 {
 try {
 $request->validate([
-'name' => ['required', 'string', 'max:255'],
-'username' => ['required', 'string', 'max:255', 'unique:users'],
-'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-'password' => ['required', 'string', 'min:8', 'confirmed', Rules\Password::defaults()],
+    'name' => ['required', 'string', 'max:255'],
+    'username' => ['required', 'string', 'max:255', 'unique:users'],
+    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+    'password' => ['required', 'string', 'min:8', 'confirmed', Rules\Password::defaults()],
     'gender' => ['required' , 'in:male,female'],
     'birth_date' => ['required' ,'date'],
 ]);

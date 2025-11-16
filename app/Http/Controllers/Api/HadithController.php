@@ -11,23 +11,21 @@ class HadithController extends Controller
 {
     public function index()
     {
-        return Hadith::with(['book', 'narrator', 'explaining', 'rulingOfMuhaddith', 'finalRuling'])->get();
+        return Hadith::with(['book', 'rawi', 'explaining', 'rulingOfMuhaddith', 'finalRuling'])->get();
     }
 
     public function store(Request $request)
     {
         $data = $request->validate([
-           $temp= 'hadithtext' => 'required|string',
-            TextHelper::normalizeArabic('textwithoutdiacritics') => 'nullable|string',
-            'hadithtype' => 'nullable|string',
-            'hadithnumber' => 'nullable|integer',
-            'narrator' => 'nullable|exists:narrators,id',
+            'HadithText' => 'required|string',
+            'HadithType' => 'nullable|string',
+            'HadithNumber' => 'nullable|integer',
+            'Rawi' => 'nullable|exists:rawis,id',
             'Source' => 'nullable|exists:books,id',
-            'rulingofmuhaddith' => 'nullable|exists:ruling_of_hadiths,id',
-            'finalruling' => 'nullable|exists:ruling_of_hadiths,id',
-            'explaining' => 'nullable|exists:explainings,id',
-            'adminid' => 'nullable|exists:users,id',
-            'subvalid' => 'nullable|integer',
+            'RulingOfMuhaddith' => 'nullable|exists:ruling_of_hadiths,id',
+            'FinalRuling' => 'nullable|exists:ruling_of_hadiths,id',
+            'Explaining' => 'nullable|exists:explainings,id',
+            'SubValid' => 'nullable|integer',
         ]);
 
         $hadith = Hadith::create($data);
@@ -36,7 +34,7 @@ class HadithController extends Controller
 
     public function show(Hadith $hadith)
     {
-        return $hadith->load(['book', 'narrator', 'explaining']);
+        return $hadith->load(['book', 'rawi', 'explaining']);
     }
 
     public function update(Request $request, Hadith $hadith)
