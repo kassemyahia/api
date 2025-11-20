@@ -10,8 +10,11 @@ class BookController extends Controller
 {
     public function index()
     {
-        return Book::all();
+        return Book::query()
+            ->select('book_name')
+            ->get();
     }
+
 
     public function store(Request $request)
     {

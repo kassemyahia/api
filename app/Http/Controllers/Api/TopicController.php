@@ -10,7 +10,9 @@ class TopicController extends Controller
 {
     public function index()
     {
-        return Topic::all();
+        return Topic::query()
+            ->select('TopicName')
+            ->get();
     }
 
     public function store(Request $request)

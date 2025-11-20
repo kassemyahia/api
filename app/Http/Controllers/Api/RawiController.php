@@ -9,7 +9,9 @@ class RawiController extends Controller
 {
     public function index()
     {
-        return Rawi::all();
+        return Rawi::query()
+            ->select('name')
+            ->get();
     }
 
     public function store(Request $request)

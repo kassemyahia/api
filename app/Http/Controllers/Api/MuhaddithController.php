@@ -10,7 +10,15 @@ class MuhaddithController extends Controller
 {
     public function index()
     {
-        return Muhaddith::all();
+        return Muhaddith::query()
+            ->select('name')
+            ->get();
+    }
+    public function listWithAbout()
+    {
+        return Muhaddith::query()
+            ->select('name', 'about')
+            ->get();
     }
 
     public function store(Request $request)
