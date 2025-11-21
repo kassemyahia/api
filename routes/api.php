@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RawiController;
 use App\Http\Controllers\Api\RulingController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\ExplainingController;
+use App\Http\Controllers\Api\FakeHadithController;
 use Illuminate\Support\Facades\DB;
 // routes/api.php
 use App\Http\Controllers\Api\Auth\RegisterController;
@@ -37,7 +38,9 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/muhaddiths-with-about', [MuhaddithController::class, 'listWithAbout']);
+Route::get('/muhaddiths_with_about', [MuhaddithController::class, 'listWithAbout']);
+
+Route::get('/fakehadiths', [FakeHadithController::class, 'index']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
