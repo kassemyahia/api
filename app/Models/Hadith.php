@@ -68,6 +68,13 @@ class Hadith extends Model
 
     public function topics()
     {
-        return $this->belongsToMany(Topic::class, 'topic_classes', 'hadithID', 'topicID');
+        return $this->belongsToMany(
+            Topic::class,
+            'topic_classes',   // اسم Pivot Table
+            'HadithID',        // FK داخل جدول الكسر يشير للحديث
+            'TopicID'          // FK داخل جدول الكسر يشير للموضوع
+        );
     }
+
+
 }

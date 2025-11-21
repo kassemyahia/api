@@ -11,7 +11,7 @@ class MuhaddithController extends Controller
     public function index()
     {
         return Muhaddith::query()
-            ->select('name')
+            ->select('id','name')
             ->get();
     }
     public function listWithAbout()

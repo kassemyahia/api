@@ -11,7 +11,7 @@ class BookController extends Controller
     public function index()
     {
         return Book::query()
-            ->select('book_name')
+            ->select('id','book_name')
             ->get();
     }
 

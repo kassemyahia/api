@@ -15,16 +15,37 @@ class HadithResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
+
             'HadithType' => $this->HadithType,
             'HadithText' => $this->HadithText,
             'HadithNumber' => $this->HadithNumber,
 
-            // علاقات مختصرة:
-            'book' => $this->book?->book_name,
-            'rawi' => $this->rawi?->name,
-            'explaining' => $this->explaining?->ETEXT,
-            'ruling_of_muhaddith' => $this->rulingOfMuhaddith?->RulingText,
-            'final_ruling' => $this->finalRuling?->RulingText,
+            // للعلاقات → نرجع الـ name + id
+            'book' => [
+                'id'   => $this->book?->id,
+                'name' => $this->book?->book_name,
+            ],
+
+            'rawi' => [
+                'id'   => $this->rawi?->id,
+                'name' => $this->rawi?->name,
+            ],
+
+            'explaining' => [
+                'id'    => $this->explaining?->id,
+                'text'  => $this->explaining?->ETEXT,
+            ],
+
+            'ruling_of_muhaddith' => [
+                'id'   => $this->rulingOfMuhaddith?->id,
+                'text' => $this->rulingOfMuhaddith?->RulingText,
+            ],
+
+            'final_ruling' => [
+                'id'   => $this->finalRuling?->id,
+                'text' => $this->finalRuling?->RulingText,
+            ],
         ];
     }
 

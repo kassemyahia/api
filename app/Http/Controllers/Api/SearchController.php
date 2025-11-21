@@ -20,7 +20,7 @@ class SearchController extends Controller
         }
 
         // Example: Searching for products by name or description
-        $results = hadith::with(['book', 'rawi','explaining','rulingOfMuhaddith','finalRuling'])
+        $results = hadith::with(['book', 'rawi','topics','explaining','rulingOfMuhaddith','finalRuling'])
             ->where('HadithText', 'LIKE', "%{$query}%")
             ->orWhere('TextWithoutDiacritics', 'LIKE', "%{$query}%")
             ->get();

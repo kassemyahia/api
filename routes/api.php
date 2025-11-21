@@ -11,12 +11,12 @@ use App\Http\Controllers\Api\RulingController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\ExplainingController;
 use App\Http\Controllers\Api\FakeHadithController;
+use App\Http\Controllers\Api\AdvancedSearchController;
 use Illuminate\Support\Facades\DB;
 // routes/api.php
 use App\Http\Controllers\Api\Auth\RegisterController;
 
 Route::post('/auth/register', RegisterController::class);
-
 
 Route::apiResource('hadiths', HadithController::class);
 
@@ -32,9 +32,7 @@ Route::apiResource('topics', TopicController::class);
 
 Route::apiResource('explainings', ExplainingController::class);
 
-
 Route::post('/register', [AuthController::class, 'register']);
-
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -42,13 +40,11 @@ Route::get('/muhaddiths_with_about', [MuhaddithController::class, 'listWithAbout
 
 Route::get('/fakehadiths', [FakeHadithController::class, 'index']);
 
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-
 });
 
 Route::get('/test-db', function () {
@@ -61,3 +57,8 @@ Route::get('/test-db', function () {
 });
 
 Route::get('/search', [SearchController::class, 'index']);
+
+Route::get('/advanced_search', [AdvancedSearchController::class, 'index']);
+
+Route::get('subvalid', [HadithController::class, 'subvalid']);
+

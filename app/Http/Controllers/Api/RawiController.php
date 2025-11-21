@@ -10,7 +10,7 @@ class RawiController extends Controller
     public function index()
     {
         return Rawi::query()
-            ->select('name')
+            ->select('id','name')
             ->get();
     }
 

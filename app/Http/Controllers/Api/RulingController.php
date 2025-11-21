@@ -10,7 +10,9 @@ class RulingController extends Controller
 {
     public function index()
     {
-        return RulingOfHadith::all();
+        return RulingOfHadith::query()
+            ->select('id' ,'RulingText')
+            ->get();
     }
 
     public function store(Request $request)

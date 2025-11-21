@@ -16,6 +16,12 @@ class Topic extends Model
     // 🔗 العلاقات
     public function hadiths()
     {
-        return $this->belongsToMany(Hadith::class, 'topic_classes', 'topic_id', 'hadith_id');
+        return $this->belongsToMany(
+            Hadith::class,
+            'topic_classes',  // اسم Pivot Table
+            'TopicID',        // FK داخل جدول الكسر يشير للموضوع
+            'HadithID'        // FK داخل جدول الكسر يشير للحديث
+        );
     }
+
 }

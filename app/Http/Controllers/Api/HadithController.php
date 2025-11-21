@@ -6,12 +6,14 @@ use App\Helpers\TextHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Hadith;
 use Illuminate\Http\Request;
+use App\Http\Resources\HadithResource;
+
 
 class HadithController extends Controller
 {
     public function index()
     {
-        return Hadith::with(['book', 'rawi', 'explaining', 'rulingOfMuhaddith', 'finalRuling'])->get();
+        return Hadith::with(['book', 'rawi', 'explaining', 'rulingOfMuhaddith', 'finalRuling' ])->get();
     }
 
     public function store(Request $request)
@@ -48,4 +50,24 @@ class HadithController extends Controller
         $hadith->delete();
         return response()->json(null, 204);
     }
+    public function subvalid(Request $request )
+    {
+        $id = $request->input('id');
+        $hadith = Hadith::with([
+            'book',
+            'rawi',
+            'explaining',
+            'rulingOfMuhaddith',
+            'finalRuling',
+            'topics',
+        ])->find($id);
+
+        if (!$hadith or $id = null) {
+            return response()->json(['message' => 'لا يوجد صحيح بديل لهذا الحديث'], 404);
+        }
+
+        return new HadithResource($hadith);
+    }
+
+
 }

@@ -11,7 +11,7 @@ class FakeHadithController extends Controller
 {
     public function index(){
         return FakeHadith::query()
-            ->select('FakeHadithText','Ruling')
+            ->select('id','FakeHadithText','Ruling')
             ->get();
     }
 }
