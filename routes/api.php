@@ -62,3 +62,4 @@ Route::get('/advanced_search', [AdvancedSearchController::class, 'index']);
 
 Route::get('subvalid', [HadithController::class, 'subvalid']);
 
+Route::get('show_hadith', [HadithController::class, 'show_hadith']);

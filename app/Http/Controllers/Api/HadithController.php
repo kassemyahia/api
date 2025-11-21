@@ -39,6 +39,26 @@ class HadithController extends Controller
         return $hadith->load(['book', 'rawi', 'explaining']);
     }
 
+    public function show_hadith(Request $request)
+    {
+     $id = $request->input('id');
+        $hadith = Hadith::with([
+            'book',
+            'rawi',
+            'explaining',
+            'rulingOfMuhaddith',
+            'finalRuling',
+            'topics',
+        ])->find($id);
+
+        if (!$hadith or $id = null) {
+            return response()->json(['message' => ' '], 404);
+        }
+
+        return new HadithResource($hadith);
+
+    }
+
     public function update(Request $request, Hadith $hadith)
     {
         $hadith->update($request->all());
@@ -67,6 +87,7 @@ class HadithController extends Controller
         }
 
         return new HadithResource($hadith);
+
     }
 
 
