@@ -12,12 +12,13 @@ class AdvancedSearchController extends Controller
     public function index(Request $request)
     {
         $text       = $request->input('text');
-        $rawi       = $request->input('rawi');
-        $muhaddith  = $request->input('muhaddith');
-        $topic      = $request->input('topic');
-        $book       = $request->input('book');
-        $rul        = $request->input('rul');
-        $type       = $request->input('type');
+
+        $rawi       = (array) $request->input('rawi', []);
+        $rul        = (array) $request->input('rul', []);
+        $book       = (array) $request->input('book', []);
+        $type       = (array) $request->input('type', []);
+        $topic      = (array) $request->input('topic', []);
+        $muhaddith  = (array) $request->input('muhaddith', []);
 
 
         $hadiths = Hadith::with([
@@ -36,34 +37,33 @@ class AdvancedSearchController extends Controller
             });
         }
 
-        if ($rawi) {
-            $hadiths->where('Rawi', $rawi);
+        if (!empty($rawi)) {
+            $hadiths->whereIn('Rawi', $rawi);
         }
 
-        if ($rul) {
-            $hadiths->where('FinalRuling', $rul);
+        if (!empty($rul)) {
+            $hadiths->whereIn('FinalRuling', $rul);
         }
 
-        if ($book) {
-            $hadiths->where('Source', $book);
+        if (!empty($book)) {
+            $hadiths->whereIn('Source', $book);
         }
-        if ($muhaddith) {
+
+        if (!empty($muhaddith)) {
             $hadiths->whereHas('book', function ($q) use ($muhaddith) {
-                $q->where('muhaddith', $muhaddith);
+                $q->whereIn('muhaddith', $muhaddith);
             });
         }
 
-        if ($topic) {
+        if (!empty($topic)) {
             $hadiths->whereHas('topics', function ($q) use ($topic) {
-                $q->where('topics.id', $topic);
+                $q->whereIn('topics.id', $topic);
             });
         }
 
-
-        if ($type) {
-            $hadiths->where('HadithType', $type);
+        if (!empty($type)) {
+            $hadiths->whereIn('HadithType', $type);
         }
-
 
         return HadithResource::collection($hadiths->get());
     }
