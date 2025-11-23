@@ -17,7 +17,7 @@ class AdvancedSearchController extends Controller
         $topic      = $request->input('topic');
         $book       = $request->input('book');
         $rul        = $request->input('rul');
-
+        $type       = $request->input('type');
 
 
         $hadiths = Hadith::with([
@@ -58,6 +58,12 @@ class AdvancedSearchController extends Controller
                 $q->where('topics.id', $topic);
             });
         }
+
+
+        if ($type) {
+            $hadiths->where('HadithType', $type);
+        }
+
 
         return HadithResource::collection($hadiths->get());
     }
