@@ -18,7 +18,7 @@ class FakeHadithController extends Controller
     {
         $data = $request->validate([
             'FakeHadithText' => 'required|string',
-            'SubValid'       => 'required|integer|exists:hadiths,id',
+            'SubValid'       => 'nullable|integer|exists:hadiths,id',
             'Ruling'         => 'required|integer|exists:ruling_of_hadiths,id',
         ]);
 
@@ -37,7 +37,7 @@ class FakeHadithController extends Controller
     {
         $data = $request->validate([
             'FakeHadithText' => 'sometimes|string',
-            'SubValid'       => 'nullable|integer|exists:hadiths,id',
+            'SubValid'       => 'sometimes|integer|exists:hadiths,id',
             'Ruling'         => 'sometimes|integer|exists:ruling_of_hadiths,id',
         ]);
 
