@@ -19,4 +19,9 @@ class Book extends Model
     {
         return $this->hasMany(Hadith::class, 'Source');
     }
+    public function muhaddith()
+    {
+        return $this->belongsTo(Muhaddith::class, 'muhaddith');
+    }
+
 }

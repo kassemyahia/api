@@ -47,8 +47,11 @@ class AdvancedSearchController extends Controller
         if ($book) {
             $hadiths->where('Source', $book);
         }
-
-
+        if ($muhaddith) {
+            $hadiths->whereHas('book', function ($q) use ($muhaddith) {
+                $q->where('muhaddith', $muhaddith);
+            });
+        }
 
         if ($topic) {
             $hadiths->whereHas('topics', function ($q) use ($topic) {
