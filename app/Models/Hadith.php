@@ -34,6 +34,51 @@ class Hadith extends Model
         'created_at',
         'updated_at',
     ];
+    public function similarHadiths()
+    {
+        return $this->belongsToMany(
+            Hadith::class,
+            'similar_hadiths',
+            'MainHadith',   // عمود الحديث الرئيسي
+            'SimHadith'     // عمود الحديث المشابه
+        );
+    }
+    public function similarTo()
+    {
+        return $this->belongsToMany(
+            Hadith::class,
+            'similar_hadiths',
+            'SimHadith',
+            'MainHadith'
+        );
+    }
+    public function referenceHadiths()
+    {
+        return $this->belongsToMany(
+            Hadith::class,
+            'reference_hadiths',
+            'MainHadith',
+            'RefHadith'
+        );
+    }
+    public function referencedBy()
+    {
+        return $this->belongsToMany(
+            Hadith::class,
+            'reference_hadiths',
+            'RefHadith',
+            'MainHadith'
+        );
+    }
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'favorites',
+            'hadith_id',
+            'user_id'
+        );
+    }
 
     // 🔗 العلاقات
     public function book()

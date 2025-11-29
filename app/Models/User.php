@@ -23,4 +23,15 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function favorites()
+    {
+        return $this->belongsToMany(
+            Hadith::class,
+            'favorites',   // اسم جدول المفضلة
+            'user_id',     // العمود الذي يشير للمستخدم
+            'hadith_id'    // العمود الذي يشير للحديث
+        );
+    }
+
+
 }

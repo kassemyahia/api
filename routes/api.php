@@ -12,6 +12,9 @@ use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\ExplainingController;
 use App\Http\Controllers\Api\FakeHadithController;
 use App\Http\Controllers\Api\AdvancedSearchController;
+use App\Http\Controllers\Api\SimilarHadithController;
+use App\Http\Controllers\Api\FavoriteController;
+use App\Http\Controllers\Api\FakeSearchController;
 use Illuminate\Support\Facades\DB;
 // routes/api.php
 use App\Http\Controllers\Api\Auth\RegisterController;
@@ -49,6 +52,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
+Route::get('/similar/{id}', [SimilarHadithController::class, 'index']);
+
+Route::get('/fake_search', [FakeSearchController::class, 'index']);
+
 
 Route::get('/search', [SearchController::class, 'index']);
 
@@ -57,6 +64,8 @@ Route::get('/advanced_search', [AdvancedSearchController::class, 'index']);
 Route::get('subvalid', [HadithController::class, 'subvalid']);
 
 Route::get('show_hadith', [HadithController::class, 'show_hadith']);
+
+Route::middleware('auth:sanctum')->get('/favorites', [FavoriteController::class, 'userFavorites']);
 
 
 
