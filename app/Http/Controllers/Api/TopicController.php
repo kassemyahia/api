@@ -11,7 +11,7 @@ class TopicController extends Controller
     public function index()
     {
         return Topic::query()
-            ->select('TopicName')
+            ->select('id','TopicName')
             ->get();
     }
 
