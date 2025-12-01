@@ -65,8 +65,13 @@ Route::get('subvalid', [HadithController::class, 'subvalid']);
 
 Route::get('show_hadith', [HadithController::class, 'show_hadith']);
 
-Route::middleware('auth:sanctum')->get('/favorites', [FavoriteController::class, 'userFavorites']);
+Route::middleware('auth:sanctum')->group(function () {
 
+    Route::post('/favorites/add', [FavoriteController::class, 'add']);
+    Route::post('/favorites/remove', [FavoriteController::class, 'remove']);
+
+    Route::get('/favorites', [FavoriteController::class, 'userFavorites']);
+});
 
 
 
