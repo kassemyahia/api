@@ -52,6 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
+Route::middleware('auth:sanctum')->delete('/delete_account', [AuthController::class, 'deleteAccount']);
+
+
 Route::get('/similar/{id}', [SimilarHadithController::class, 'index']);
 
 Route::get('/fake_search', [FakeSearchController::class, 'index']);

@@ -96,4 +96,26 @@ class AuthController extends Controller
             'message' => 'Logged out successfully.',
         ], Response::HTTP_OK);
     }
+
+    public function deleteAccount(Request $request)
+    {
+        $user = $request->user(); // المستخدم الحالي حسب التوكن
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'User not authenticated.'
+            ], 401);
+        }
+
+        // حذف جميع التوكنات
+        $user->tokens()->delete();
+
+        // حذف الحساب نفسه
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Account deleted successfully.',
+        ], 200);
+    }
+
 }
