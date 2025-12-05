@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('SubValid')->nullable();
             $table->foreignId('Explaining')->nullable()->constrained('explainings');
-            $table->enum('HadithType', ['مرفوع', 'قدسي'])->nullable();
+            $table->enum('HadithType', ['مرفوع', 'قدسي','موقوف','أثر للصحابة'])->nullable();
             $table->text('HadithText');
             $table->text('TextWithoutDiacritics')->nullable();
             $table->integer('HadithNumber')->nullable();
