@@ -46,6 +46,14 @@ class HadithResource extends JsonResource
                 'id'   => $this->finalRuling?->id,
                 'text' => $this->finalRuling?->RulingText,
             ],
+
+            'topics' => $this->topics->map(function ($topic) {
+                return [
+                    'id'   => $topic->id,
+                    'name' => $topic->TopicName,
+                ];
+            }),
+            
         ];
     }
 
