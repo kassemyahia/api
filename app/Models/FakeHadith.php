@@ -19,7 +19,7 @@ class FakeHadith extends Model
 
 
 
-    public function correctHadith()
+    public function subvalid()
     {
         return $this->belongsTo(Hadith::class, 'SubValid');
     }

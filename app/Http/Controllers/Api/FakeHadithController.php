@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FakeHadithResource;
 use App\Models\FakeHadith;
 use Illuminate\Http\Request;
 use function Laravel\Prompts\select;
@@ -10,9 +11,11 @@ use function Laravel\Prompts\select;
 class FakeHadithController extends Controller
 {
     public function index(){
-        return FakeHadith::query()
-            ->select('id','FakeHadithText','Ruling')
-            ->get();
+        return FakeHadithResource::collection(
+            FakeHadith::query()
+                ->select('id','FakeHadithText','Ruling','SubValid')
+                 ->get()
+        );
     }
     public function store(Request $request)
     {

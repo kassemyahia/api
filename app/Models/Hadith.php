@@ -106,6 +106,10 @@ class Hadith extends Model
         return $this->belongsTo(RulingOfHadith::class, 'FinalRuling');
     }
 
+    public function subvalid()  {
+        return $this->hasMany(Hadith::class, 'SubValid');
+    }
+
 //    public function admin()
 //    {
 //        return $this->belongsTo(User::class, 'admin_id');
