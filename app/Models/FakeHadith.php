@@ -11,20 +11,16 @@ class FakeHadith extends Model
 
     protected $fillable = [
         'FakeHadithText',
-        'Ruling',
         'SubValid',
+        'Ruling',
     ];
 
-
-
-
-
-    public function subvalid()
+    public function subvalidfake()
     {
         return $this->belongsTo(Hadith::class, 'SubValid');
     }
 
-    public function ruling()
+    public function rulingfake()
     {
         return $this->belongsTo(RulingOfHadith::class, 'Ruling');
     }

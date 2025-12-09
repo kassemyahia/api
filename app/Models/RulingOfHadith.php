@@ -23,4 +23,9 @@ class RulingOfHadith extends Model
     {
         return $this->hasMany(Hadith::class, 'final_ruling_id');
     }
+
+    public function fakeruling()
+    {
+        return $this->hasMany(FakeHadith::class, 'Ruling');
+    }
 }

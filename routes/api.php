@@ -43,7 +43,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/muhaddiths_with_about', [MuhaddithController::class, 'listWithAbout']);
 
-Route::get('/fakehadiths', [FakeHadithController::class, 'index']);
+//  Route::get('/fakehadiths', [FakeHadithController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

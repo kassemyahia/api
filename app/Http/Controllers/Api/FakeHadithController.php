@@ -6,54 +6,75 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\FakeHadithResource;
 use App\Models\FakeHadith;
 use Illuminate\Http\Request;
-use function Laravel\Prompts\select;
 
 class FakeHadithController extends Controller
 {
-    public function index(){
+    /**
+     * قائمة الأحاديث غير الصحيحة
+     */
+    public function index()
+    {
         return FakeHadithResource::collection(
             FakeHadith::query()
-                ->select('id','FakeHadithText','Ruling','SubValid')
-                 ->get()
+                ->with(['rulingfake', 'subvalidfake'])
+                ->orderBy('id')
+                ->get()
         );
     }
+
+    /**
+     * إضافة حديث غير صحيح
+     */
     public function store(Request $request)
     {
         $data = $request->validate([
             'FakeHadithText' => 'required|string',
-            'SubValid'       => 'nullable|integer|exists:hadiths,id',
-            'Ruling'         => 'required|integer|exists:ruling_of_hadiths,id',
+            'SubValid'       => 'nullable|exists:hadiths,id',
+            'Ruling'         => 'required|exists:ruling_of_hadiths,id',
         ]);
 
         $fake = FakeHadith::create($data);
 
-        return response()->json($fake, 201);
+        return new FakeHadithResource(
+            $fake->load(['rulingfake', 'subvalidfake'])
+        );
     }
-    public function show(FakeHadith $fakeHadith)
+
+    /**
+     * جلب حديث غير صحيح واحد (للتحرير)
+     */
+    
+    public function show(FakeHadith $fakehadith)
     {
-        return $fakeHadith->load([
-            'correctHadith:id,HadithText',
-            'ruling:id,RulingText'
-        ]);
+        return new FakeHadithResource(
+            $fakehadith->load(['rulingfake', 'subvalidfake'])
+        );
     }
-    public function update(Request $request, FakeHadith $fakeHadith)
+
+    /**
+     * تحديث حديث غير صحيح
+     */
+    public function update(Request $request, FakeHadith $fakehadith)
     {
         $data = $request->validate([
             'FakeHadithText' => 'sometimes|string',
-            'SubValid'       => 'sometimes|integer|exists:hadiths,id',
-            'Ruling'         => 'sometimes|integer|exists:ruling_of_hadiths,id',
+            'SubValid'       => 'sometimes|exists:hadiths,id',
+            'Ruling'         => 'sometimes|exists:ruling_of_hadiths,id',
         ]);
 
-        $fakeHadith->update($data);
+        $fakehadith->update($data);
 
-        return response()->json($fakeHadith);
+        return new FakeHadithResource(
+            $fakehadith->load(['rulingfake', 'subvalid'])
+        );
     }
 
-    public function destroy(FakeHadith $fakeHadith)
+    /**
+     * حذف حديث غير صحيح
+     */
+    public function destroy(FakeHadith $fakehadith)
     {
-        $fakeHadith->delete();
+        $fakehadith->delete();
         return response()->json(null, 204);
     }
-
-
 }

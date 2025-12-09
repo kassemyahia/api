@@ -12,12 +12,12 @@ class FakeHadithResource extends JsonResource
             'id'        => $this->id,
             'text'      => $this->FakeHadithText,
             'sub_valid' => [
-                'id'   => $this->subvalid?->id,
-                'text' => $this->subvalid?->HadithText,
+                'id'   => $this->subvalidfake?->id,
+                'text' => $this->subvalidfake?->HadithText,
             ],
             'ruling'    =>  [
-                'id'   => $this->ruling?->id,
-                'text' => $this->ruling?->RulingText,
+                'id'   => $this->rulingfake?->id,
+                'text' => $this->rulingfake?->RulingText,
             ],
             // 'hadith'    => $this->hadith?->HadithText,
         ];
