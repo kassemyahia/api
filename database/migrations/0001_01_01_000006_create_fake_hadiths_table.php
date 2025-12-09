@@ -7,7 +7,7 @@ return new class extends Migration {
 public function up(): void {
 Schema::create('fake_hadiths', function (Blueprint $table) {
 $table->id();
-$table->foreignId('SubValid')->nullable();
+$table->foreignId('SubValid')->nullable()->constrained('hadiths')->nullOnDelete();
 $table->text('FakeHadithText');
 $table->foreignId('Ruling')->nullable()->constrained('ruling_of_hadiths')->nullOnDelete();
 $table->timestamps();

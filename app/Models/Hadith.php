@@ -10,6 +10,7 @@ class Hadith extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'HadithText',
         'TextWithoutDiacritics',
         'HadithType',
@@ -23,7 +24,6 @@ class Hadith extends Model
     ];
 
     protected $hidden =[
-        'id',
         'Rawi',
         'Source',
         'TextWithoutDiacritics',
