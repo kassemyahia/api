@@ -11,7 +11,7 @@ class MuhaddithController extends Controller
     public function index()
     {
         return Muhaddith::query()
-            ->select('id','name')
+            ->select('id','name','about')
             ->get();
     }
     public function listWithAbout()
@@ -26,6 +26,7 @@ class MuhaddithController extends Controller
         $data = $request->validate([
             'name' => 'required|string',
             'gender' => 'nullable|string',
+            'about' => 'nullable|string',
 
         ]);
 
