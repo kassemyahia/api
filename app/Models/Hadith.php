@@ -20,20 +20,21 @@ class Hadith extends Model
         'RulingOfMuhaddith',
         'FinalRuling',
         'Explaining',
-        'SubValid',
+        'sub_valid',
     ];
 
-    protected $hidden =[
+    protected $hidden = [
         'Rawi',
         'Source',
         'TextWithoutDiacritics',
         'RulingOfMuhaddith',
         'FinalRuling',
         'Explaining',
-        'SubValid',
+        'sub_valid',
         'created_at',
         'updated_at',
     ];
+
     public function similarHadiths()
     {
         return $this->belongsToMany(
@@ -43,6 +44,7 @@ class Hadith extends Model
             'SimHadith'     // عمود الحديث المشابه
         );
     }
+
     public function similarTo()
     {
         return $this->belongsToMany(
@@ -52,6 +54,7 @@ class Hadith extends Model
             'MainHadith'
         );
     }
+
     public function referenceHadiths()
     {
         return $this->belongsToMany(
@@ -61,6 +64,7 @@ class Hadith extends Model
             'RefHadith'
         );
     }
+
     public function referencedBy()
     {
         return $this->belongsToMany(
@@ -70,6 +74,7 @@ class Hadith extends Model
             'MainHadith'
         );
     }
+
     public function favoritedBy()
     {
         return $this->belongsToMany(
@@ -106,9 +111,10 @@ class Hadith extends Model
         return $this->belongsTo(RulingOfHadith::class, 'FinalRuling');
     }
 
-     public function Msubvalid()  {
-         return $this->hasMany(Hadith::class, 'SubValid');
-     }
+    public function subvalid()
+    {
+        return $this->belongsTo(Hadith::class, 'sub_valid');
+    }
 
     public function admin()
     {
@@ -124,6 +130,4 @@ class Hadith extends Model
             'TopicID'          // FK داخل جدول الكسر يشير للموضوع
         );
     }
-
-
 }

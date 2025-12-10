@@ -4,15 +4,15 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
-return new class extends Migration {
+return new class extends Migration
+{
     public function up(): void
     {
         Schema::create('hadiths', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('SubValid')->nullable();
+            $table->foreignId('sub_valid')->nullable()->constrained('hadiths')->nullOnDelete()->nullOnUpdate();
             $table->foreignId('Explaining')->nullable()->constrained('explainings');
-            $table->enum('HadithType', ['مرفوع', 'قدسي','موقوف','أثر للصحابة'])->nullable();
+            $table->enum('HadithType', ['مرفوع', 'قدسي', 'موقوف', 'أثر للصحابة'])->nullable();
             $table->text('HadithText');
             $table->text('TextWithoutDiacritics')->nullable();
             $table->integer('HadithNumber')->nullable();

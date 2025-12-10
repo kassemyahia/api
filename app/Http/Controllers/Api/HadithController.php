@@ -37,7 +37,7 @@ class HadithController extends Controller
 
     public function show(Hadith $hadith)
     {
-        return $hadith->load(['book', 'rawi', 'explaining', 'rulingOfMuhaddith', 'finalRuling', 'topics']);
+        return $hadith->load(['book', 'rawi', 'explaining', 'rulingOfMuhaddith', 'finalRuling', 'topics', 'subvalid']);
     }
 
     public function show_hadith(Request $request)
