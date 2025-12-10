@@ -12,6 +12,7 @@ class BookController extends Controller
     {
         return Book::query()
             ->select('id','book_name')
+            ->orderBy('id')
             ->get();
     }
 

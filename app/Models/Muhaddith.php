@@ -11,6 +11,7 @@ class Muhaddith extends Model
 
     protected $fillable = [
         'name',
+        'about',
         'gender',
     ];
 

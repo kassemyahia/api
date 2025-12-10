@@ -12,6 +12,7 @@ class TopicController extends Controller
     {
         return Topic::query()
             ->select('id','TopicName')
+            ->orderBy('id')
             ->get();
     }
 

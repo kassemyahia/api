@@ -10,7 +10,7 @@ class ExplainingController extends Controller
 {
     public function index()
     {
-        return Explaining::all();
+        return Explaining::orderBy('id')->get();
     }
 
     public function store(Request $request)
@@ -20,6 +20,7 @@ class ExplainingController extends Controller
         ]);
 
         $explaining = Explaining::create($data);
+
         return response()->json($explaining, 201);
     }
 
@@ -31,12 +32,14 @@ class ExplainingController extends Controller
     public function update(Request $request, Explaining $explaining)
     {
         $explaining->update($request->all());
+
         return response()->json($explaining);
     }
 
     public function destroy(Explaining $explaining)
     {
         $explaining->delete();
+
         return response()->json(null, 204);
     }
 }

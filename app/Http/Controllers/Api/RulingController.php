@@ -12,6 +12,7 @@ class RulingController extends Controller
     {
         return RulingOfHadith::query()
             ->select('id' ,'RulingText')
+            ->orderBy('id')
             ->get();
     }
 

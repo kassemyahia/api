@@ -12,12 +12,14 @@ class MuhaddithController extends Controller
     {
         return Muhaddith::query()
             ->select('id','name','about')
+            ->orderBy('id')
             ->get();
     }
     public function listWithAbout()
     {
         return Muhaddith::query()
             ->select('name', 'about')
+             ->orderBy('id')   
             ->get();
     }
 

@@ -11,6 +11,7 @@ class RawiController extends Controller
     {
         return Rawi::query()
             ->select('id','name')
+            ->orderBy('id')
             ->get();
     }
 
