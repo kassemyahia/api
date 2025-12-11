@@ -11,21 +11,21 @@ class BookController extends Controller
     public function index()
     {
         return Book::query()
-            ->select('id','book_name')
+            ->select('id', 'book_name as name')
             ->orderBy('id')
             ->get();
     }
 
-
     public function store(Request $request)
     {
         $data = $request->validate([
-            'book_name' => 'required|string',
+            'name' => 'required|string',
             'muhaddith' => 'nullable|string',
             'num_of_hadiths' => 'nullable|integer',
         ]);
 
         $book = Book::create($data);
+
         return response()->json($book, 201);
     }
 
@@ -37,12 +37,14 @@ class BookController extends Controller
     public function update(Request $request, Book $book)
     {
         $book->update($request->all());
+
         return response()->json($book);
     }
 
     public function destroy(Book $book)
     {
         $book->delete();
+
         return response()->json(null, 204);
     }
 }

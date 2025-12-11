@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class HadithResource extends JsonResource
@@ -23,38 +22,37 @@ class HadithResource extends JsonResource
 
             // للعلاقات → نرجع الـ name + id
             'book' => [
-                'id'   => $this->book?->id,
+                'id' => $this->book?->id,
                 'name' => $this->book?->book_name,
             ],
 
             'rawi' => [
-                'id'   => $this->rawi?->id,
+                'id' => $this->rawi?->id,
                 'name' => $this->rawi?->name,
             ],
 
             'explaining' => [
-                'id'    => $this->explaining?->id,
-                'text'  => $this->explaining?->ETEXT,
+                'id' => $this->explaining?->id,
+                'text' => $this->explaining?->ETEXT,
             ],
 
             'ruling_of_muhaddith' => [
-                'id'   => $this->rulingOfMuhaddith?->id,
+                'id' => $this->rulingOfMuhaddith?->id,
                 'text' => $this->rulingOfMuhaddith?->RulingText,
             ],
 
             'final_ruling' => [
-                'id'   => $this->finalRuling?->id,
+                'id' => $this->finalRuling?->id,
                 'text' => $this->finalRuling?->RulingText,
             ],
 
             'topics' => $this->topics->map(function ($topic) {
                 return [
-                    'id'   => $topic->id,
+                    'id' => $topic->id,
                     'name' => $topic->TopicName,
                 ];
             }),
-            
+
         ];
     }
-
 }

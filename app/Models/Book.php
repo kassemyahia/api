@@ -14,14 +14,21 @@ class Book extends Model
         'muhaddith',
     ];
 
+    // protected $appends = ['name'];
+
+    // public function getNameAttribute()
+    // {
+    //     return $this->book_name;
+    // }
+
     // 🔗 العلاقات
     public function hadiths()
     {
         return $this->hasMany(Hadith::class, 'Source');
     }
+
     public function muhaddith()
     {
         return $this->belongsTo(Muhaddith::class, 'muhaddith');
     }
-
 }
