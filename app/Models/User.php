@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -15,14 +16,16 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'usertype',
         'birth_date',
-        'gender'
+        'gender',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
     public function favorites()
     {
         return $this->belongsToMany(
@@ -32,6 +35,4 @@ class User extends Authenticatable
             'hadith_id'    // العمود الذي يشير للحديث
         );
     }
-
-
 }

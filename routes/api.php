@@ -38,7 +38,7 @@ Route::apiResource('topics', TopicController::class);
 
 Route::apiResource('explainings', ExplainingController::class);
 
-Route::apiResource('user', UserController::class);
+Route::apiResource('users', UserController::class);
 
 Route::apiResource('/fakehadiths', FakeHadithController::class);
 
