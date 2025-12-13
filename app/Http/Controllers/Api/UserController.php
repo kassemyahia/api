@@ -16,9 +16,9 @@ class UserController extends Controller
             ->get();
     }
 
-    public function show(User $user)
+    public function show(Request $request)
     {
-        return $user;
+        return $request->user();
     }
 
     public function update(Request $request, User $user)

@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\RawiController;
 use App\Http\Controllers\Api\RulingController;
 use App\Http\Controllers\Api\SearchController;
 use App\Http\Controllers\Api\SimilarHadithController;
+use App\Http\Controllers\Api\TopicClassController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -35,10 +36,12 @@ Route::apiResource('rawis', RawiController::class);
 Route::apiResource('ruling_of_hadiths', RulingController::class);
 
 Route::apiResource('topics', TopicController::class);
+Route::apiResource('topic_classes', TopicClassController::class);
 
 Route::apiResource('explainings', ExplainingController::class);
 
 Route::apiResource('users', UserController::class);
+Route::middleware('auth:sanctum')->get('/me', [UserController::class, 'show']);
 
 Route::apiResource('/fakehadiths', FakeHadithController::class);
 
