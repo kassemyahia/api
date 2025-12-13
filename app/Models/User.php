@@ -32,7 +32,7 @@ class User extends Authenticatable
             Hadith::class,
             'favorites',   // اسم جدول المفضلة
             'user_id',     // العمود الذي يشير للمستخدم
-            'hadith_id'    // العمود الذي يشير للحديث
+            'HadithID'     // العمود الذي يشير للحديث
         );
     }
 }

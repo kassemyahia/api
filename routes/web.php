@@ -1,9 +1,6 @@
 <?php
-//
-//use Illuminate\Support\Facades\Route;
-//
-//Route::get('/', function () {
-//    return ['Laravel' => app()->version()];
-//});
-//
-//require __DIR__.'/auth.php';
+
+use Illuminate\Support\Facades\Route;
+
+Route::view('/temp/login', 'temp-login');
+Route::view('/temp/favorites', 'favorites-test');

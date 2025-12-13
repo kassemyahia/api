@@ -34,7 +34,7 @@ class FavoriteController extends Controller
         $user = $request->user();
 
         // التأكد إن الحديث ليس مضاف مسبقاً
-        if ($user->favorites()->where('hadith_id', $request->hadith_id)->exists()) {
+        if ($user->favorites()->wherePivot('HadithID', $request->hadith_id)->exists()) {
             return response()->json([
                 'added' => false,
                 'message' => 'الحديث موجود مسبقاً في المفضلة'
